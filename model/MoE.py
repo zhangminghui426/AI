@@ -23,15 +23,17 @@ class MoELayer(nn.Module):
         output = torch.bmm(gate_score.unsqueeze(1), expert_outputs).squeeze(1)
         return output
 
-input_size = 5
-output_size = 3
-num_experts = 4
-batch_size = 10
 
-model = MoELayer(num_experts, input_size, output_size)
+if __name__ == "__main__":
+    input_size = 5
+    output_size = 3
+    num_experts = 4
+    batch_size = 10
 
-demo = torch.randn(batch_size, input_size)
+    model = MoELayer(num_experts, input_size, output_size)
 
-output = model(demo)
+    demo = torch.randn(batch_size, input_size)
 
-print(output.shape)  # 输出: torch.Size([10, 3])
+    output = model(demo)
+
+    print(output.shape)  # 输出: torch.Size([10, 3])
